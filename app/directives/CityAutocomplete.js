@@ -6,18 +6,18 @@
  *
  * Simple Usage:
  *
- * <input type="text" ng-autocomplete="result"/>
+ * <input type="text" city-autocomplete="result"/>
  *
  * creates the autocomplete text box and gives you access to the result
  *
- *   + `ng-autocomplete="result"`: specifies the directive, $scope.result will hold the textbox result
+ *   + `city-autocomplete="result"`: specifies the directive, $scope.result will hold the textbox result
  *
  *
  * Advanced Usage:
  *
- * <input type="text" ng-autocomplete="result" details="details" options="options"/>
+ * <input type="text" city-autocomplete="result" details="details" options="options"/>
  *
- *   + `ng-autocomplete="result"`: specifies the directive, $scope.result will hold the textbox autocomplete result
+ *   + `city-autocomplete="result"`: specifies the directive, $scope.result will hold the textbox autocomplete result
  *
  *   + `details="details"`: $scope.details will hold the autocomplete's more detailed result; latlng. address components, etc.
  *
