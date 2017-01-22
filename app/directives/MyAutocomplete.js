@@ -73,9 +73,7 @@ app.directive('myAutocomplete', function($parse) {
                     scope.gPlace = new google.maps.places.Autocomplete(element[0], opts);
                     google.maps.event.addListener(scope.gPlace, 'place_changed', function() {
                         scope.$apply(function() {
-//              if (scope.details) {
                             scope.details = scope.gPlace.getPlace();
-//              }
                             scope.myAutocomplete = element.val();
                         });
                     })

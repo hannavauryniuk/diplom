@@ -16,7 +16,7 @@
         <input type="text" id="Autocomplete" class="form-control" my-autocomplete="search" details="details" options="options"/>
       </div>
       <div class="col-sm-2">
-        <button class="btn btn-primary" ng-click="getWeather()" >Get weather</button>
+        <button class="btn btn-primary" ng-click="addMarker()" >Add city</button>
       </div>
       <div class="col-xs-2">
         <input type="number" class="form-control" placeholder="Rows number" ng-model="itemNumber">
@@ -38,14 +38,22 @@
         <div class="col-sm-1"><img src="{{result.iconUrl}}"></div>
       </div>
     </div>
+    <ui-gmap-google-map center="map.center" zoom="map.zoom" events="map.events">
+      <ui-gmap-marker ng-repeat="m in map.markers" coords="m.coords" idkey="m.id"></ui-gmap-marker>
+    </ui-gmap-google-map>
   </div>
-  <script type="text/javascript" src="http://maps.googleapis.com/maps/api/js?libraries=places&key=AIzaSyAQiTYMzqNRW3zQzQVOJCQkrF_kPStIs0c"></script>
+
+
+  <script type="text/javascript" src="http://maps.googleapis.com/maps/api/js?libraries=places&key=AIzaSyAKZIxKO0w-59mF5kxJi7tUyuBH7m9nWKA"></script>
   <script src="bower_components/lodash/dist/lodash.js"></script>
   <script src="bower_components/angular/angular.js"></script>
   <script src="bower_components/angular-simple-logger/dist/angular-simple-logger.js"></script>
   <script src="bower_components/angular-google-maps/dist/angular-google-maps.js"></script>
   <script src="app.js"></script>
-  <script src="controllers/CheckWeatherController.js"></script>
   <script src="directives/MyAutocomplete.js"></script>
+  <script src="services/DirectionsRendererService.js"></script>
+  <script src="services/DirectionsService.js"></script>
+  <script src="controllers/CheckWeatherController.js"></script>
+
 </body>
 </html>
