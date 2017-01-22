@@ -10,40 +10,18 @@
   <link rel="stylesheet" href="app.css">
 </head>
 <body>
-  <div class="container" class="form-control" ng-controller="checkWeatherController">
-    <div class="row">
-      <div class="col-sm-3">
-        <input type="text" id="Autocomplete" class="form-control" my-autocomplete="search" details="details" options="options"/>
-      </div>
-      <div class="col-sm-2">
-        <button class="btn btn-primary" ng-click="getWeather()" >Get weather</button>
-      </div>
-      <div class="col-xs-2">
-        <input type="number" class="form-control" placeholder="Rows number" ng-model="itemNumber">
-      </div>
-    </div>
-    <div class="result-list">
-      <div class="row">
-        <div class="col-lg-3">City</div>
-        <div class="col-lg-2">Country</div>
-        <div class="col-lg-3">Temperature</div>
-        <div class="col-lg-3">Sky</div>
-        <div class="col-lg-1"></div>
-      </div>
-      <div class="row row-eq-height" ng-repeat="result in results">
-        <div class="col-sm-3">{{result.name}}</div>
-        <div class="col-sm-2">{{result.code}}</div>
-        <div class="col-sm-3">{{result.temp}}°C</div>
-        <div class="col-sm-3">{{result.description}}</div>
-        <div class="col-sm-1"><img src="{{result.iconUrl}}"></div>
-      </div>
-    </div>
-  </div>
+
+
+  <div ng-view></div>
+
   <script type="text/javascript" src="http://maps.googleapis.com/maps/api/js?libraries=places&key=AIzaSyAQiTYMzqNRW3zQzQVOJCQkrF_kPStIs0c"></script>
   <script src="bower_components/lodash/dist/lodash.js"></script>
   <script src="bower_components/angular/angular.js"></script>
+  <script src="bower_components/angular-route/angular-route.js"></script>
   <script src="bower_components/angular-simple-logger/dist/angular-simple-logger.js"></script>
   <script src="bower_components/angular-google-maps/dist/angular-google-maps.js"></script>
+
+
   <script src="app.js"></script>
   <script src="controllers/CheckWeatherController.js"></script>
   <script src="directives/MyAutocomplete.js"></script>
