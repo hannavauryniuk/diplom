@@ -6,13 +6,13 @@
   background: #d9edf7;
   border-radius: 4px;
 }
-
 .row-eq-height > div {
   align-self: center;
 }
 .result-list {
   padding-top: 30px;
 }
+.angular-google-map-container { height: 600px; }
 .home {
   background-image: url(images/background.jpg);
   position: absolute;
