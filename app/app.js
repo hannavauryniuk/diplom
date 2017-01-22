@@ -5,7 +5,7 @@ var app = angular.module('myApp', [
     'uiGmapgoogle-maps',
     'ngRoute'
 ]);
-app.config(['$locationProvider', '$routeProvider', function($locationProvider, $routeProvider) {
+app.config(['$locationProvider', '$routeProvider', 'uiGmapGoogleMapApiProvider', function($locationProvider, $routeProvider, uiGmapGoogleMapApiProvider) {
     $locationProvider.hashPrefix('!');
     $routeProvider
         .when ('/', {
@@ -15,5 +15,10 @@ app.config(['$locationProvider', '$routeProvider', function($locationProvider, $
             templateUrl : 'views/main.html',
             controller: 'checkWeatherController'
         })
-        .otherwise({redirectTo: '/errorPage.html'})
+        .otherwise({redirectTo: '/errorPage.html'});
+    uiGmapGoogleMapApiProvider.configure({
+        key: 'AIzaSyAKZIxKO0w-59mF5kxJi7tUyuBH7m9nWKA',
+        v: '3', //defaults to latest 3.X anyhow
+        libraries: 'places'
+    });
 }]);
