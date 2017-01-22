@@ -1,25 +1,12 @@
 var app = angular.module('myApp');
 
-app.controller('checkWeatherController', function ($scope,  $http, directionsRenderer, directionsService) {
-    $scope.initializeDirections = function() {
-        if ($scope.directionsDisplay) {
-            // fallback to clear the previous directions
-            $scope.directionsDisplay.setMap(null);
-            $scope.directionsDisplay = null;
-        }
-        $scope.directionsDisplay = new directionsRenderer.get({
-            preserveViewport: true,
-            suppressMarkers: true
-        });
-    };
-    $scope.initializeDirections();
-    $scope.directionsService = directionsService.get();
+app.controller('checkWeatherController', function ($scope,  $http, uiGmapGoogleMapApi) {
     $scope.map = {
         center: { latitude: 0, longitude: 0 },
         zoom: 2,
         markers: [],
         events: {
-            tilesloaded: function(map){
+            tilesloaded: function (map) {
                 $scope.directionsDisplay.setMap(map);
             }
         }
@@ -31,6 +18,12 @@ app.controller('checkWeatherController', function ($scope,  $http, directionsRen
     $scope.details = '';
     $scope.itemNumber = 3;
     $scope.results =[];
+
+    uiGmapGoogleMapApi.then(function(maps) {
+        $scope.gMaps = maps;
+        $scope.initializeDirections();
+        $scope.directionsService = new maps.DirectionsService;
+    });
 
     $scope.getWeather = function() {
         $http.get("http://api.openweathermap.org/data/2.5/weather?q="+$scope.search+"&APPID=170fb5209f8eb67ee44eb90ccc45b4eb").then(
@@ -74,8 +67,8 @@ app.controller('checkWeatherController', function ($scope,  $http, directionsRen
                 waypoints: [],
                 optimizeWaypoints: false,
                 provideRouteAlternatives: false,
-                travelMode: google.maps.TravelMode.DRIVING,
-                unitSystem: google.maps.UnitSystem.METRIC
+                travelMode: $scope.gMaps.TravelMode.DRIVING,
+                unitSystem: $scope.gMaps.UnitSystem.METRIC
             };
             if (markers.length > 2) {
                 for(var i = 1; i <= markers.length-1; i++){
@@ -86,8 +79,7 @@ app.controller('checkWeatherController', function ($scope,  $http, directionsRen
                 }
             }
             $scope.directionsService.route(directionsServiceRequest, function (response, status) {
-                if (status == google.maps.DirectionsStatus.OK) {
-
+                if (status == $scope.gMaps.DirectionsStatus.OK) {
                     $scope.directionsDisplay.setDirections(response);
                 }
             });
@@ -105,5 +97,16 @@ app.controller('checkWeatherController', function ($scope,  $http, directionsRen
         if ($scope.results.length >= $scope.itemNumber) {
             $scope.results =[];
         }
+    };
+    $scope.initializeDirections = function() {
+        if ($scope.directionsDisplay) {
+            // fallback to clear the previous directions
+            $scope.directionsDisplay.setMap(null);
+            $scope.directionsDisplay = null;
+        }
+        $scope.directionsDisplay = new $scope.gMaps.DirectionsRenderer({
+            preserveViewport: true,
+            suppressMarkers: true
+        });
     };
 });

@@ -33,12 +33,12 @@
  */
 var app = angular.module('myApp');
 
-app.directive('myAutocomplete', function($parse) {
+app.directive('cityAutocomplete', function($parse, uiGmapGoogleMapApi) {
         return {
 
             scope: {
                 details: '=',
-                myAutocomplete: '=',
+                cityAutocomplete: '=',
                 options: '='
             },
 
@@ -67,29 +67,32 @@ app.directive('myAutocomplete', function($parse) {
                 };
                 initOpts();
 
-                //create new autocomplete
-                //reinitializes on every change of the options provided
-                var newAutocomplete = function() {
-                    scope.gPlace = new google.maps.places.Autocomplete(element[0], opts);
-                    google.maps.event.addListener(scope.gPlace, 'place_changed', function() {
-                        scope.$apply(function() {
-                            scope.details = scope.gPlace.getPlace();
-                            scope.myAutocomplete = element.val();
-                        });
-                    })
-                };
-                newAutocomplete();
-
-                //watch options provided to directive
-                scope.watchOptions = function () {
-                    return scope.options
-                };
-                scope.$watch(scope.watchOptions, function () {
-                    initOpts();
+                uiGmapGoogleMapApi.then(function(maps) {
+                    //create new autocomplete
+                    //reinitializes on every change of the options provided
+                    var newAutocomplete = function () {
+                        scope.gPlace = new google.maps.places.Autocomplete(element[0], opts);
+                        google.maps.event.addListener(scope.gPlace, 'place_changed', function () {
+                            scope.$apply(function () {
+                                scope.details = scope.gPlace.getPlace();
+                                scope.cityAutocomplete = element.val();
+                            });
+                        })
+                    };
                     newAutocomplete();
-                    element[0].value = '';
-                    scope.myAutocomplete = element.val();
-                }, true);
+
+                    //watch options provided to directive
+                    scope.watchOptions = function () {
+                        return scope.options
+                    };
+                    scope.$watch(scope.watchOptions, function () {
+                        initOpts();
+                        newAutocomplete();
+                        element[0].value = '';
+                        scope.cityAutocomplete = element.val();
+                    }, true);
+
+                });
             }
         };
     });
