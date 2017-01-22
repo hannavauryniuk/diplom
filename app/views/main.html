@@ -1,10 +1,10 @@
 <div class="container" class="form-control" ng-controller="checkWeatherController">
     <div class="row">
         <div class="col-sm-3">
-            <input type="text" id="Autocomplete" class="form-control" my-autocomplete="search" details="details" options="options"/>
+            <input type="text" id="Autocomplete" class="form-control" city-autocomplete="search" details="details" options="options"/>
         </div>
         <div class="col-sm-2">
-            <button class="btn btn-primary" ng-click="getWeather()" >Get weather</button>
+            <button class="btn btn-success" ng-click="addMarker()" >Add city</button>
         </div>
         <div class="col-xs-2">
             <input type="number" class="form-control" placeholder="Rows number" ng-model="itemNumber">
@@ -26,4 +26,7 @@
             <div class="col-sm-1"><img src="{{result.iconUrl}}"></div>
         </div>
     </div>
+    <ui-gmap-google-map center="map.center" zoom="map.zoom" events="map.events">
+        <ui-gmap-marker ng-repeat="m in map.markers" coords="m.coords" idkey="m.id"></ui-gmap-marker>
+    </ui-gmap-google-map>
 </div>
