@@ -37,4 +37,37 @@
   color: #ECEBE3;
   text-decoration:none;
 }
+.result-list {
+  min-height: 150px;
+}
 
+.odd {
+  background-color: lightgray;
+}
+.even {
+  background-color: #ECEBE3;
+}
+.search{
+  margin-top: 50px;
+}
+
+
+.container {
+  background-image: url('images/background1.png');
+  padding:50px;
+}
+.lastInput  {
+  width: 150px;
+}
+.search span {
+  font-size: x-large;
+  line-height: 30px;
+}
+.result-list .row {
+  padding: 5px;
+}
+.weather {
+  position: absolute;
+  top:5px;
+  left: 12px;
+}

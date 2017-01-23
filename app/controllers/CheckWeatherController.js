@@ -1,7 +1,7 @@
 var app = angular.module('myApp');
 
 app.controller('checkWeatherController', function ($scope,  $http, uiGmapGoogleMapApi, httpWeatherRequestService) {
-
+    $scope.shownWeather = false;
     $scope.map = {
         center: { latitude: 0, longitude: 0 },
         zoom: 2,
@@ -28,7 +28,6 @@ app.controller('checkWeatherController', function ($scope,  $http, uiGmapGoogleM
     $scope.addMarker = function (search) {
         $scope.cleanUp();
         $scope.getWeather(search);
-        console.log($scope.results);
         var marker = {
             id: Date.now(),
             coords: {
@@ -97,7 +96,6 @@ app.controller('checkWeatherController', function ($scope,  $http, uiGmapGoogleM
         });
     };
     $scope.results = httpWeatherRequestService.results;
-    console.log($scope.results);
     $scope.getWeather = httpWeatherRequestService.getWeather;
     if ($scope.results.length >= $scope.itemNumber) {
         $scope.results =[];

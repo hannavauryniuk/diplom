@@ -1,29 +1,39 @@
 <div class="container" class="form-control" ng-controller="checkWeatherController">
-    <div class="row">
-        <div class="col-sm-3">
-            <input type="text" id="Autocomplete" ng-model="search" class="form-control" city-autocomplete="search" details="details" options="options"/>
-        </div>
-        <div class="col-sm-2">
-            <button class="btn btn-success" ng-click="addMarker(search)" >Add city</button>
-        </div>
-        <div class="col-xs-2">
-            <input type="number" class="form-control" placeholder="Rows number" ng-model="itemNumber">
-        </div>
-    </div>
+     <div class="search">
+         <div class="row">
+             <div class="col-sm-3">
+                 <input type="text" id="Autocomplete" ng-model="search" class="form-control" city-autocomplete="search" details="details" options="options"/>
+             </div>
+             <div class="col-sm-2">
+                 <button class="btn btn-success" ng-click="addMarker(search)" >Добавить город</button>
+             </div>
+             <div class="col-xs-5 ">
+                 <span>Сколько городов вы хотите посетить?</span>
+             </div>
+             <div class="col-xs-2 lastInput">
+                 <input type="number" class="form-control" placeholder="Rows number" ng-model="itemNumber">
+
+             </div>
+
+         </div>
+     </div>
+
     <div class="result-list">
-        <div class="row">
-            <div class="col-lg-3">City</div>
-            <div class="col-lg-2">Country</div>
-            <div class="col-lg-3">Temperature</div>
-            <div class="col-lg-3">Sky</div>
-            <div class="col-lg-1"></div>
-        </div>
-        <div class="row row-eq-height" ng-repeat="result in results">
-            <div class="col-sm-3">{{result.name}}</div>
-            <div class="col-sm-2">{{result.code}}</div>
-            <div class="col-sm-3">{{result.temp}}°C</div>
-            <div class="col-sm-3">{{result.description}}</div>
-            <div class="col-sm-1"><img src="{{result.iconUrl}}"></div>
+
+        <div class="row" ng-repeat="result in results" ng-class-odd="'odd'" ng-class-even="'even'">
+            <div class="col-sm-3"><h4>{{result.name}}</h4></div>
+            <div class="col-sm-3">
+                <a href="" ng-click="shownWeather = !shownWeather" class="btn btn-success" ng-hide="shownWeather">Проверить погоду</a>
+                <div class="weather"  ng-show="shownWeather">
+                    <h4>{{result.temp}}°C {{result.description}}</h4>
+            </div>
+            </div>
+
+            <div class="col-sm-3">
+                <button class="btn btn-success">Куда можно сходить?</button>
+            </div>
+
+
         </div>
     </div>
     <ui-gmap-google-map center="map.center" zoom="map.zoom" events="map.events">
