@@ -17,7 +17,7 @@ app.config(['$locationProvider', '$routeProvider', 'uiGmapGoogleMapApiProvider',
         })
         .otherwise({redirectTo: '/errorPage.html'});
     uiGmapGoogleMapApiProvider.configure({
-        key: 'AIzaSyAKZIxKO0w-59mF5kxJi7tUyuBH7m9nWKA',
+        key: 'AIzaSyBvLJIeT1Nxm2lGjae5NPqQrmNgMseQuJE',
         v: '3',
         libraries: 'places'
     });
