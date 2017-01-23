@@ -27,6 +27,8 @@ app.controller('checkWeatherController', function ($scope,  $http, uiGmapGoogleM
     });
     $scope.addMarker = function (search) {
         $scope.cleanUp();
+
+
         $scope.getWeather(search);
         var marker = {
             id: Date.now(),
@@ -97,8 +99,9 @@ app.controller('checkWeatherController', function ($scope,  $http, uiGmapGoogleM
     };
     $scope.results = httpWeatherRequestService.results;
     $scope.getWeather = httpWeatherRequestService.getWeather;
-    if ($scope.results.length >= $scope.itemNumber) {
-        $scope.results =[];
-    };
+    while ($scope.results.length > $scope.itemNumber) {
+        $scope.results.pop();
+    }
+
 
 })

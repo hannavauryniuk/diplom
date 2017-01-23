@@ -16,5 +16,6 @@ app.service('httpWeatherRequestService', function ($http) {
             }
         )
     }
+
     this.results = results;
 })
